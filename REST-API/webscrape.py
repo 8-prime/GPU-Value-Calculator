@@ -18,6 +18,9 @@ def getBrandFromName(name):
         return "Intel"
 
 
+
+
+
 def getCurrentGpuData():
     import requests
     from bs4 import BeautifulSoup
@@ -25,13 +28,11 @@ def getCurrentGpuData():
     import random
     import pricescrape
     import time
-
+    import os
 
     URL = "https://www.tomshardware.com/reviews/gpu-hierarchy,4388.html"
     page = requests.get(URL)
     tomsHardware = BeautifulSoup(page.content, "html.parser")
-
-
 
     captions = tomsHardware.find_all('caption', string="Tom's Hardware Rasterization GPU Benchmarks Hierarchy")
     tables = [caption.find_parent('table') for caption in captions]
@@ -41,10 +42,10 @@ def getCurrentGpuData():
 
     gpus = []
 
-    for row in rows:
-        time.sleep(20)
+    for index, row in enumerate(rows):
         if (row.find_parent('thead')):
             continue
+
 
         rowDetails = row.find_all('td')
 
@@ -54,7 +55,6 @@ def getCurrentGpuData():
         twoKUltra = getFpsFromPerformance(rowDetails[3].get_text())
         fourKUltra = getFpsFromPerformance(rowDetails[4].get_text())
         brand = getBrandFromName(gpuName)
-        price = pricescrape.getPriceForGpu(gpuName)
 
 
         gpus.append(
@@ -65,9 +65,33 @@ def getCurrentGpuData():
                 'twoKUltra': twoKUltra,
                 'fourKUltra': fourKUltra,
                 'brand': brand,
-                'price': price
+                'price': 0
             }
         )
+
+        
+    if (not os.path.isfile('./pricelist.json')):
+        gpuPrices = {}
+        for gpu in gpus:
+            gpuPrices[gpu['name']] = pricescrape.getPriceForGpu(gpu['name']) 
+        import json
+        with open('./pricelist.json', 'w') as fp:
+            json.dump(gpuPrices, fp)
     
+
+
+
+    with open('./pricelist.json') as json_file:
+        data = json.load(json_file)
+        for gpu in gpus:
+            if  gpu['name'] in data.keys():
+                gpu['price'] = data[gpu['name']]
+            else:
+                data[gpu['name']] = pricescrape.getPriceForGpu(gpu['name']) 
+        
+
+
+
+    print(gpus)    
     return gpus
 
