@@ -23,6 +23,7 @@ def getCurrentGpuData():
     from bs4 import BeautifulSoup
     import json
     import random
+    import pricescrape
 
     URL = "https://www.tomshardware.com/reviews/gpu-hierarchy,4388.html"
     page = requests.get(URL)
@@ -50,7 +51,7 @@ def getCurrentGpuData():
         twoKUltra = getFpsFromPerformance(rowDetails[3].get_text())
         fourKUltra = getFpsFromPerformance(rowDetails[4].get_text())
         brand = getBrandFromName(gpuName)
-        price = random.randint(100,1600)
+        price = pricescrape.getPriceForGpu(gpuName)
 
 
         gpus.append(
