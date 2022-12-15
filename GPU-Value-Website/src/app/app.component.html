@@ -5,7 +5,7 @@
     </h1>
   </div>
   <div class="mt-20 w-3/4">
-    <div id="selector">
+    <div id="selector" class="">
       <ul class="flex">
         <li *ngFor="let setting of settings; index as i" class="flex-1 mr-2">
           <a (click)="onSelect(i)" class="pill"  [ngClass]="{'activepill' : i === selectedIndex}" href="#">{{setting}}</a>

@@ -5,11 +5,11 @@
 
 
 .pill {
-    @apply text-center block border bg-gray-200 border-white rounded hover:border-gray-200 text-gray-800 hover:bg-gray-200 py-2 px-4;
+    @apply text-center block border text-lg bg-gray-200 border-white rounded hover:border-gray-200 text-gray-800 hover:bg-gray-200 py-6 px-4;
 }
 
 .activepill {
-    @apply text-center block border bg-green-800 bg-green-800 rounded hover:bg-gray-500 text-gray-100  py-2 px-4;
+    @apply text-center block border text-lg bg-violet-600 border-violet-600 rounded hover:bg-violet-500 text-gray-100  py-6 px-4 ;
 }
 
 .Amd {
