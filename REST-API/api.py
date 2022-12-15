@@ -1,4 +1,5 @@
 from flask import Flask
+import flask as fs
 from flask_restful import Resource, Api
 
 import webscrape
@@ -18,7 +19,9 @@ class GetGPU1080(Resource):
 
 class GetGpus(Resource):
     def get(self):
-        return webscrape.getCurrentGpuData()
+        response = fs.jsonify(webscrape.getCurrentGpuData())
+        response.headers.add('Access-Control-Allow-Origin', '*')
+        return response
 
 api.add_resource(HelloWorld, '/')
 api.add_resource(GetGPU1080, '/pimmel')

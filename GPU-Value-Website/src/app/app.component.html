@@ -55,18 +55,35 @@
                   <tr *ngFor="let item of gpus; index as i" class="bg-white border-b transition duration-300 ease-in-out hover:bg-gray-100">
                     <td class="px-2 py-4 whitesrounded aspect-square h-4 bg-red-500pace-nowrap text-sm font-medium text-gray-900"> 
                       <div [class]="item.brand">
-
                       </div>
                     </td>
                     <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900"> {{item.name}}</td>
-                    <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                      {{item.fps}}
+                    <td *ngIf="selectedIndex === 0" class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                      {{item.tenMedium}} FPS
+                    </td>
+                    <td *ngIf="selectedIndex === 1" class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                      {{item.tenUltra}} FPS
+                    </td>
+                    <td *ngIf="selectedIndex === 2" class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                      {{item.twoKUltra}} FPS
+                    </td>
+                    <td *ngIf="selectedIndex === 3" class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                      {{item.fourKUltra}} FPS
                     </td>
                     <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
                       {{item.price}}
                     </td>
-                    <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                      {{item.value}}
+                    <td *ngIf="selectedIndex === 0" class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                      {{item.tenMedium / item.price * 100}}
+                    </td>
+                    <td *ngIf="selectedIndex === 1" class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                      {{item.tenUltra / item.price * 100}}
+                    </td>
+                    <td *ngIf="selectedIndex === 2" class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                      {{item.twoKUltra / item.price * 100}}
+                    </td>
+                    <td *ngIf="selectedIndex === 3" class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                      {{item.fourKUltra / item.price * 100}}
                     </td>
                   </tr>
                 </tbody>

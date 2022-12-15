@@ -1,15 +1,19 @@
 export class GPU {
-    name: string;
-    price: number;
-    fps: number;
-    value: string;
     brand: string;
+    fourKUltra: number;
+    name: string;
+    tenMedium: number;
+    tenUltra: number;
+    twoKUltra: number;
+    price: number;
 
-    constructor(name: string, price: number, fps: number, value: string, brand: string) {
+    constructor(brand: string, fourkUltra: number, name: string, tenMedium: number, tenUltra: number, twoKUltra: number) {
         this.brand = brand;
+        this.fourKUltra = Number(fourkUltra),
         this.name = name;
-        this.price = price;
-        this.fps = fps;
-        this.value = value;   
+        this.tenMedium = Number(tenMedium);
+        this.tenUltra = Number(tenUltra);
+        this.twoKUltra = Number(twoKUltra);
+        this.price = 1000;        
     }
 }
