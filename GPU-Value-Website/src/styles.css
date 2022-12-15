@@ -1,1 +1,25 @@
 /* You can add global styles to this file, and also import other style files */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+.pill {
+    @apply text-center block border bg-gray-200 border-white rounded hover:border-gray-200 text-gray-800 hover:bg-gray-200 py-2 px-4;
+}
+
+.activepill {
+    @apply text-center block border bg-green-800 bg-green-800 rounded hover:bg-gray-500 text-gray-100  py-2 px-4;
+}
+
+.Amd {
+    @apply rounded aspect-square h-4 bg-red-500;
+}
+
+.Intel {
+    @apply rounded aspect-square h-4 bg-blue-500;
+}
+
+.Nvidia {
+    @apply rounded aspect-square h-4 bg-green-500;
+}
