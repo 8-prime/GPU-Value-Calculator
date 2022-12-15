@@ -32,5 +32,3 @@ def getPriceForGpu(gpuname):
 
     return price_average
 
-
-getPriceForGpu("GeForce GTX 780")

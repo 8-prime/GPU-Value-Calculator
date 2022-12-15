@@ -24,6 +24,8 @@ def getCurrentGpuData():
     import json
     import random
     import pricescrape
+    import time
+
 
     URL = "https://www.tomshardware.com/reviews/gpu-hierarchy,4388.html"
     page = requests.get(URL)
@@ -40,6 +42,7 @@ def getCurrentGpuData():
     gpus = []
 
     for row in rows:
+        time.sleep(20)
         if (row.find_parent('thead')):
             continue
 
