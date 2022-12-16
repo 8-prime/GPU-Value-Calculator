@@ -46,16 +46,16 @@ export class AppComponent {
         break;
       case 'Performance':
         if (this.selectedIndex === 0){
-          this.sortedGpus = this.gpus?.sort((a, b) => compare(a.tenMedium, b.tenMedium, this.performanceSort))
+          this.sortedGpus = this.gpus?.sort((a, b) => compare(Math.floor(a.tenMedium), Math.floor(b.tenMedium), this.performanceSort))
         }
         if (this.selectedIndex === 1){
-          this.sortedGpus = this.gpus?.sort((a, b) => compare(a.tenUltra, b.tenUltra, this.performanceSort))
+          this.sortedGpus = this.gpus?.sort((a, b) => compare(Math.floor(a.tenUltra), Math.floor(b.tenUltra), this.performanceSort))
         }
         if (this.selectedIndex === 2){
-          this.sortedGpus = this.gpus?.sort((a, b) => compare(a.twoKUltra, b.twoKUltra, this.performanceSort))
+          this.sortedGpus = this.gpus?.sort((a, b) => compare(Math.floor(a.twoKUltra), Math.floor(b.twoKUltra), this.performanceSort))
         }
         if (this.selectedIndex === 3){
-          this.sortedGpus = this.gpus?.sort((a, b) => compare(a.fourKUltra, b.fourKUltra, this.performanceSort))
+          this.sortedGpus = this.gpus?.sort((a, b) => compare(Math.floor(a.fourKUltra), Math.floor(b.fourKUltra), this.performanceSort))
         }
         this.performanceSort = !this.performanceSort;
         break;
@@ -108,5 +108,8 @@ export class AppComponent {
 
 
 function compare(a: number | string, b: number | string, isAsc: boolean) {
+  var res = (a < b ? -1 : 1) * (isAsc ? 1 : -1)
+  console.log("Für die Werte " + a + "und " + b + "ergibt sich das Resultat:" + res);
+  
   return (a < b ? -1 : 1) * (isAsc ? 1 : -1);
 }
