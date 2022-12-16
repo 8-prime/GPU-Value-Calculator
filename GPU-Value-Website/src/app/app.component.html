@@ -34,25 +34,25 @@
               <table class="min-w-full">
                 <thead class="bg-white border-b">
                   <tr>
-                    <th scope="col" class="text-sm font-medium text-gray-900 px-2 py-4 text-left">
+                    <th (click)="sortData('Brand')" scope="col" class="cursor-pointer text-sm font-medium text-gray-900 px-2 py-4 text-left">
                       Brand
                     </th>
                     <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
                       Model
                     </th>
-                    <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                    <th (click)="sortData('Performance')" scope="col" class="cursor-pointer text-sm font-medium text-gray-900 px-6 py-4 text-left">
                       Performance
                     </th>
-                    <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                    <th (click)="sortData('Price')" scope="col" class="cursor-pointer text-sm font-medium text-gray-900 px-6 py-4 text-left">
                       Price
                     </th>
-                    <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                    <th (click)="sortData('Value')" scope="col" class="cursor-pointer text-sm font-medium text-gray-900 px-6 py-4 text-left">
                       Value
                     </th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr *ngFor="let item of gpus; index as i" class="bg-white border-b transition duration-300 ease-in-out hover:bg-gray-100">
+                  <tr *ngFor="let item of sortedGpus; index as i" class="bg-white border-b transition duration-300 ease-in-out hover:bg-gray-100">
                     <td class="px-2 py-4 whitesrounded aspect-square h-4 bg-red-500pace-nowrap text-sm font-medium text-gray-900"> 
                       <div [class]="item.brand">
                       </div>
