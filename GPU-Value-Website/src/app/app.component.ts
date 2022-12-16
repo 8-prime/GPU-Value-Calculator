@@ -12,7 +12,9 @@ export class AppComponent {
   
   gpus?: GPU[];
   sortedGpus?: GPU[];
+  sortedFilteredGpus?: GPU[];
 
+  filterstring?: string;
 
   getGpusFromJson(data: any): GPU[] {
     const result = JSON.stringify(data)
@@ -26,16 +28,35 @@ export class AppComponent {
 
     request.subscribe( data => {
       this.gpus = this.getGpusFromJson(data);
-      this.sortedGpus = this.gpus;
-    } );
+      this.sortedGpus = this.gpus.filter((gpu) => {
+        return gpu.price != 0;
+      });
+      this.sortedFilteredGpus = this.sortedGpus;
+    });
   }
 
+
+  onKey(event: any) { // without type info
+    this.filterList();
+  }
 
 
   brandSort: boolean = false;
   performanceSort: boolean = false;
   priceSort: boolean = false;
   valueSort: boolean = false;
+
+
+  filterList(){
+    this.sortedFilteredGpus = this.sortedGpus?.filter((gpu) => {
+      if (this.filterstring != null && this.filterstring != ''){
+        return gpu.name.includes(this.filterstring);
+      }
+      else {
+        return true;
+      }
+    })
+  }
 
 
   sortData(sortOn: string){
@@ -79,6 +100,10 @@ export class AppComponent {
         this.valueSort = !this.valueSort;
         break;
     }
+    this.sortedGpus = this.sortedGpus?.filter((gpu) => {
+      return gpu.price != 0;
+    })
+    this.filterList()
   }
 
   constructor(private http: HttpClient) {
