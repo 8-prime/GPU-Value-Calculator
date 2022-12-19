@@ -28,4 +28,4 @@ api.add_resource(GetGPU1080, '/pimmel')
 api.add_resource(GetGpus, '/gpus')
 
 if __name__ == '__main__':
-    app.run(debug=False)
+    app.run(host= '192.168.2.35', port=5000, debug=False)
