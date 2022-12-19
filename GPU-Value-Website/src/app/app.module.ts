@@ -4,10 +4,12 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
+import { SortArrowComponent } from './sort-arrow/sort-arrow.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    SortArrowComponent
   ],
   imports: [
     BrowserModule,

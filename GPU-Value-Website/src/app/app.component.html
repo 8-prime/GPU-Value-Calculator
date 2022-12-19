@@ -12,7 +12,10 @@
         </li>
       </ul>
     </div>
+
+
     <div id="table" class="mt-20">
+      <!-- Filter field -->
       <div class="flex justify-start" >
         <div class="flex justify-center">
           <div class="xl:w-96">
@@ -27,6 +30,7 @@
           </div>
         </div>
       </div>
+      <!-- Data Table -->
       <div class="flex flex-col">
         <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
           <div class="py-2 inline-block min-w-full sm:px-6 lg:px-8">
@@ -34,55 +38,67 @@
               <table class="min-w-full">
                 <thead class="bg-white border-b">
                   <tr>
-                    <th (click)="sortData('Brand')" scope="col" class="cursor-pointer text-sm font-medium text-gray-900 px-2 py-4 text-left">
-                      Brand
+                    <th (click)="sortData('Brand')" scope="col" class="cursor-pointer text-md font-medium text-gray-900 px-2 py-4 text-left ">
+                      <div class="flex flex-row">
+                        Brand
+                        <app-sort-arrow class="h-2 w-2 mx-1 mt-1" *ngIf="'Brand' === sortColumn" [sortDesc]="brandSort"></app-sort-arrow>
+                      </div>
                     </th>
                     <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
                       Model
                     </th>
-                    <th (click)="sortData('Performance')" scope="col" class="cursor-pointer text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                      Performance
+                    <th (click)="sortData('Performance')" scope="col" class="cursor-pointer text-md font-medium text-gray-900 px-6 py-4 text-left">
+                      <div class="flex flex-row">
+                        Performance
+                        <app-sort-arrow class="h-2 w-2 mx-1 mt-1" *ngIf="'Performance' === sortColumn" [sortDesc]="performanceSort"></app-sort-arrow>
+                      </div>
                     </th>
-                    <th (click)="sortData('Price')" scope="col" class="cursor-pointer text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                      Price
+                    <th (click)="sortData('Price')" scope="col" class="cursor-pointer text-md font-medium text-gray-900 px-6 py-4 text-left">
+                      <div class="flex flex-row">
+                        Price
+                        <app-sort-arrow class="h-2 w-2 mx-1 mt-1" *ngIf="'Price' === sortColumn" [sortDesc]="priceSort"></app-sort-arrow>
+                      </div>
                     </th>
-                    <th (click)="sortData('Value')" scope="col" class="cursor-pointer text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                      Value
+                    <th (click)="sortData('Value')" scope="col" class="cursor-pointer text-md font-medium text-gray-900 px-6 py-4 text-left">
+                      <div class="flex flex-row">
+                        Value
+                        <app-sort-arrow class="h-2 w-2 mx-1 mt-1" *ngIf="'Value' === sortColumn" [sortDesc]="valueSort"></app-sort-arrow>
+                      </div>
                     </th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr *ngFor="let item of sortedFilteredGpus; index as i" class="bg-white border-b transition duration-300 ease-in-out hover:bg-gray-100">
-                    <td class="px-2 py-4 whitesrounded aspect-square h-4 bg-red-500pace-nowrap text-sm font-medium text-gray-900"> 
+                    <td class="px-2 py-4 whitesrounded aspect-square h-4 bg-red-500pace-nowrap text-md font-medium text-gray-900"> 
                       <div [class]="item.brand">
                       </div>
                     </td>
-                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900"> {{item.name}}</td>
-                    <td *ngIf="selectedIndex === 0" class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                    <td class="px-6 py-4 whitespace-nowrap text-md font-medium text-gray-900"> {{item.name}}</td>
+                    <td *ngIf="selectedIndex === 0" class="text-md text-gray-900 font-light px-6 py-4 whitespace-nowrap">
                       {{item.tenMedium}} FPS
                     </td>
-                    <td *ngIf="selectedIndex === 1" class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                    <td *ngIf="selectedIndex === 1" class="text-md text-gray-900 font-light px-6 py-4 whitespace-nowrap">
                       {{item.tenUltra}} FPS
                     </td>
-                    <td *ngIf="selectedIndex === 2" class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                    <td *ngIf="selectedIndex === 2" class="text-md text-gray-900 font-light px-6 py-4 whitespace-nowrap">
                       {{item.twoKUltra}} FPS
                     </td>
-                    <td *ngIf="selectedIndex === 3" class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                    <td *ngIf="selectedIndex === 3" class="text-md text-gray-900 font-light px-6 py-4 whitespace-nowrap">
                       {{item.fourKUltra}} FPS
                     </td>
-                    <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                    <td class="text-md text-gray-900 font-light px-6 py-4 whitespace-nowrap">
                       {{item.price}}
                     </td>
-                    <td *ngIf="selectedIndex === 0" class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                    <td *ngIf="selectedIndex === 0" class="text-md text-gray-900 font-light px-6 py-4 whitespace-nowrap">
                       {{item.tenMedium / item.price * 100}}
                     </td>
-                    <td *ngIf="selectedIndex === 1" class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                    <td *ngIf="selectedIndex === 1" class="text-md text-gray-900 font-light px-6 py-4 whitespace-nowrap">
                       {{item.tenUltra / item.price * 100}}
                     </td>
-                    <td *ngIf="selectedIndex === 2" class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                    <td *ngIf="selectedIndex === 2" class="text-md text-gray-900 font-light px-6 py-4 whitespace-nowrap">
                       {{item.twoKUltra / item.price * 100}}
                     </td>
-                    <td *ngIf="selectedIndex === 3" class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                    <td *ngIf="selectedIndex === 3" class="text-md text-gray-900 font-light px-6 py-4 whitespace-nowrap">
                       {{item.fourKUltra / item.price * 100}}
                     </td>
                   </tr>
