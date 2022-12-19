@@ -64,13 +64,18 @@ export class AppComponent {
     this.filterList();
   }
 
-  sortBrand(){
+  sortBrand(switchOrientation?: boolean){
+    if (this.sortColumn === 'Brand' && switchOrientation){
+      this.brandSort = !this.brandSort;
+    }
     this.sortedGpus = this.gpus?.sort((a, b) => compare(a.brand, b.brand, this.brandSort))
-    this.brandSort = !this.brandSort;
-    this.sortColumn = 'Brand';
   }
 
-  sortPerormance(){
+  sortPerormance(switchOrientation?: boolean){
+    if (this.sortColumn === 'Performance' && switchOrientation){
+      this.performanceSort = !this.performanceSort;
+    }
+
     if (this.selectedIndex === 0){
       this.sortedGpus = this.gpus?.sort((a, b) => compare(Math.floor(a.tenMedium), Math.floor(b.tenMedium), this.performanceSort))
     }
@@ -83,17 +88,21 @@ export class AppComponent {
     if (this.selectedIndex === 3){
       this.sortedGpus = this.gpus?.sort((a, b) => compare(Math.floor(a.fourKUltra), Math.floor(b.fourKUltra), this.performanceSort))
     }
-    this.performanceSort = !this.performanceSort;
-    this.sortColumn = 'Performance';
   }
 
-  sortPrice(){
+  sortPrice(switchOrientation?: boolean){
+    if (this.sortColumn === 'Price' && switchOrientation){
+      this.priceSort = !this.priceSort;
+    }
+
     this.sortedGpus = this.gpus?.sort((a, b) => compare(a.price, b.price, this.priceSort))
-    this.priceSort = !this.priceSort;
-    this.sortColumn = 'Price';
   }
 
-  sortValue(){
+  sortValue(switchOrientation?: boolean){
+    if (this.sortColumn === 'Value' && switchOrientation){
+      this.valueSort = !this.valueSort;
+    }
+
     if (this.selectedIndex === 0){
       this.sortedGpus = this.gpus?.sort((a, b) => compare((a.tenMedium / a.price), (b.tenMedium / b.price), this.valueSort))
     }
@@ -106,25 +115,29 @@ export class AppComponent {
     if (this.selectedIndex === 3){
       this.sortedGpus = this.gpus?.sort((a, b) => compare((a.fourKUltra / a.price), (b.fourKUltra / b.price), this.valueSort))
     }
-    this.valueSort = !this.valueSort;
-    this.sortColumn = 'Value';
   }
 
-  sortData(sortOn: string){
+  sortData(sortOn: string, switchOrientation?: boolean){
+    if (switchOrientation == null){
+      switchOrientation = true;
+    }
     switch(sortOn){
       case 'Brand':
-        this.sortBrand();
+        this.sortBrand(switchOrientation);
         break;
       case 'Performance':
-        this.sortPerormance();
+        this.sortPerormance(switchOrientation);
         break;
       case 'Price':
-        this.sortPrice();
+        this.sortPrice(switchOrientation);
         break;
       case 'Value':
-        this.sortValue();
+        this.sortValue(switchOrientation);
         break;
     }
+
+    this.sortColumn = sortOn;
+
     this.sortedGpus = this.sortedGpus?.filter((gpu) => {
       return gpu.price != 0;
     })
@@ -139,11 +152,10 @@ export class AppComponent {
   onSelect(idx: number): void {
     this.selectedIndex = idx;
     if (this.sortColumn !== undefined){
-      this.sortData(this.sortColumn);
+      this.sortData(this.sortColumn, false);
     }
   }
 }
-
 
 
 function compare(a: number | string, b: number | string, isAsc: boolean) {  

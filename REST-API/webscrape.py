@@ -1,3 +1,5 @@
+JSON_FILE_PATH = './pricelist.json'
+
 
 def getFpsFromPerformance(perf):
     splitPerf = perf.split()
@@ -70,24 +72,23 @@ def getCurrentGpuData():
         )
 
         
-    if (not os.path.isfile('./pricelist.json')):
+    if (not os.path.isfile(JSON_FILE_PATH)):
         gpuPrices = {}
         for gpu in gpus:
-            gpuPrices[gpu['name']] = pricescrape.getPriceForGpu(gpu['name']) 
-        import json
-        with open('./pricelist.json', 'w') as fp:
+            gpuPrices[gpu['name']] = pricescrape.get_price_for_gpu(gpu['name']) 
+        with open(JSON_FILE_PATH, 'w') as fp:
             json.dump(gpuPrices, fp)
     
 
 
 
-    with open('./pricelist.json') as json_file:
+    with open(JSON_FILE_PATH) as json_file:
         data = json.load(json_file)
         for gpu in gpus:
             if  gpu['name'] in data.keys():
                 gpu['price'] = data[gpu['name']]
             else:
-                data[gpu['name']] = pricescrape.getPriceForGpu(gpu['name']) 
+                data[gpu['name']] = pricescrape.get_price_for_gpu(gpu['name']) 
         
 
 

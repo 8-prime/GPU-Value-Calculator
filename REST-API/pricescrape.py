@@ -50,12 +50,12 @@ headers_list = [
 }
 ]
 
-def generateQueryString(gpuname):
+def generate_query_string(gpuname):
     return "https://geizhals.de/?fs=" + gpuname + "&hloc=de"
 
 
-def getPriceForGpu(gpuname):
-    COUNTLIMI = 10
+def get_price_for_gpu(gpuname):
+    COUNTLIMIT = 10
 
     import requests
     from bs4 import BeautifulSoup
@@ -77,7 +77,7 @@ def getPriceForGpu(gpuname):
 
     for index, price in enumerate(prices):
         divide_by = index
-        if (index >= COUNTLIMI):
+        if (index >= COUNTLIMIT):
             break
         
         price_average += float(price.get_text().replace("€", "").strip().replace(",", "."))
