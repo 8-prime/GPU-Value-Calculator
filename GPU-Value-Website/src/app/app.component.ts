@@ -38,8 +38,7 @@ export class AppComponent {
   }
 
   getInitialData(): void {
-    // const request = this.http.get('http://127.0.0.1:5000/gpus');
-    const request = this.http.get('http://79.200.187.211:5001/gpus');
+    const request = this.http.get('http://gpuprice.ddns.net:5000/gpus');
 
     request.subscribe( data => {
       this.gpus = this.getGpusFromJson(data);
@@ -53,7 +52,7 @@ export class AppComponent {
   filterList(){
     this.sortedFilteredGpus = this.sortedGpus?.filter((gpu) => {
       if (this.filterstring != null && this.filterstring != ''){
-        return gpu.name.includes(this.filterstring);
+        return gpu.name.toLowerCase().includes(this.filterstring);
       }
       else {
         return true;
