@@ -28,4 +28,10 @@ api.add_resource(GetGPU1080, '/pimmel')
 api.add_resource(GetGpus, '/gpus')
 
 if __name__ == '__main__':
-    app.run(host= '192.168.2.35', port=5000, debug=False)
+    import socket
+    s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+    s.connect(("8.8.8.8", 80))
+    print(s.getsockname()[0])
+    localaddr = s.getsockname()[0]
+    s.close()
+    app.run(host= localaddr, port=5000, debug=False)
