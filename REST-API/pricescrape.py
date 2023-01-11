@@ -63,7 +63,7 @@ def get_price_for_gpu(gpuname):
     import random
 
 
-    url = generateQueryString(gpuname)
+    url = generate_query_string(gpuname)
 
     headerIdx = random.randint(0, len(headers_list) - 1)
 
